@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,19 +11,20 @@
 </head>
 <body>
     <form action="<?php
-        echo $_SERVER["PHP_SELF"];
+        echo "helper.php";
     ?>" method="post" style="text-align: center;">
     <label for="file" style="color: <?php
-        require_once "Uploader.php";
-        if($GLOBALS["status"]){
+        if(isset($_SESSION["status"]) && $_SESSION["status"]){
             echo "green";
         }else{
             echo "red";
         }
     ?>;">
-    <?php
-        echo $GLOBALS["message"];
-    ?>
+        <?php 
+            if(isset($_SESSION["message"])){
+                echo $_SESSION["message"];
+            }
+        ?>
     </label>
     <br><br>
         <input type="file" name="file" id="file">
